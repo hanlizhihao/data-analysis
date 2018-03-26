@@ -12,7 +12,6 @@ import org.apache.storm.tuple.Fields;
 @Slf4j
 public class TopologyMain {
     public static void main(String[] args) throws InterruptedException {
-    //Topology definition
         TopologyBuilder builder = new TopologyBuilder();
         builder.setSpout("word-reader",new WordReader());
         builder.setBolt("word-normalizer", new WordNormalizer())
@@ -37,10 +36,4 @@ public class TopologyMain {
         Thread.sleep(1000);
         cluster.shutdown();
     }
-//    public static void main(String[] args) {
-//        File file = new File("src/main/resources/words.txt");
-//        if (file.exists()) {
-//            log.info("存在");
-//        }
-//    }
 }
