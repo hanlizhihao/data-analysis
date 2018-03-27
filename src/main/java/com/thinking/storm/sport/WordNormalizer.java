@@ -8,14 +8,14 @@ import org.apache.storm.task.OutputCollector;
 import org.apache.storm.task.TopologyContext;
 import org.apache.storm.topology.IRichBolt;
 import org.apache.storm.topology.OutputFieldsDeclarer;
+import org.apache.storm.topology.base.BaseRichBolt;
 import org.apache.storm.tuple.Fields;
 import org.apache.storm.tuple.Tuple;
 import org.apache.storm.tuple.Values;
 
 @Slf4j
-public class WordNormalizer implements IRichBolt {
+public class WordNormalizer extends BaseRichBolt {
     private OutputCollector collector;
-    public void cleanup() {}
     /**
      * The bolt will receive the line from the
      * words file and process it to Normalize this line
@@ -30,13 +30,11 @@ public class WordNormalizer implements IRichBolt {
             word = word.trim();
             if(!word.isEmpty()){
                 word = word.toLowerCase();
-//Emit the word
-                List a = new ArrayList();
+                List<Tuple> a = new ArrayList<>();
                 a.add(input);
                 collector.emit(a,new Values(word));
             }
         }
-// Acknowledge the tuple
         collector.ack(input);
     }
     public void prepare(Map stormConf, TopologyContext context,
@@ -48,10 +46,5 @@ public class WordNormalizer implements IRichBolt {
      */
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
         declarer.declare(new Fields("word"));
-    }
-
-    @Override
-    public Map<String, Object> getComponentConfiguration() {
-        return null;
     }
 }

@@ -9,10 +9,11 @@ import org.apache.storm.task.OutputCollector;
 import org.apache.storm.task.TopologyContext;
 import org.apache.storm.topology.IRichBolt;
 import org.apache.storm.topology.OutputFieldsDeclarer;
+import org.apache.storm.topology.base.BaseRichBolt;
 import org.apache.storm.tuple.Tuple;
 
 @Slf4j
-public class WordCounter implements IRichBolt {
+public class WordCounter extends BaseRichBolt {
     Integer id;
     String name;
     Map<String, Integer> counters;
@@ -27,7 +28,6 @@ public class WordCounter implements IRichBolt {
         log.info("-- Word Counter [{}- {}] --", name, id);
         for (Map.Entry<String, Integer> entry : counters.entrySet()) {
             log.info("{}: {}", entry.getKey(), entry.getValue());
-            System.out.println("{}: {} " + entry.getKey() + entry.getValue());
         }
     }
 
@@ -57,7 +57,7 @@ public class WordCounter implements IRichBolt {
     @Override
     public void prepare(Map stormConf, TopologyContext context,
                         OutputCollector collector) {
-        this.counters = new HashMap<String, Integer>();
+        this.counters = new HashMap<>();
         this.collector = collector;
         this.name = context.getThisComponentId();
         this.id = context.getThisTaskId();
