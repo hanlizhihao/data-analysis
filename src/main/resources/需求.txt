@@ -1,0 +1,6 @@
+1.获取最近1分钟内最新的GPS坐标，根据设备id和区间时间从t_vehicleanaloginfo表，然后写入tmp_gps
+2.从t_alarmsummary，t_vehiclealarminfo中取数据，组合至tmp_alarm01表
+3.从tmp_alarm01，t_vehicleinfo，driver_attendance，v_lineinfo，t_vehiclealarmtype，t_alarmlevelinfo，tmp_gps表中组合至tmp_alarm02表
+4.更新tmp_alarm02 isNew由N变为U
+5.更新t_alarmsummary 关联了tmp_alarm02，更新t_alarmsummary的lastAlarmTime，dismissTime，finished
+6.插入t_alarmsummary从tmp_alarm02中选择isNew不是U的，删除t_alarmsummary的duration小于0的情况
