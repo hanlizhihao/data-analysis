@@ -1,4 +1,4 @@
-package com.thinking.storm.sport;
+package com.thinking.storm.example;
 
 import java.util.ArrayList;
 import java.util.List;

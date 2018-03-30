@@ -1,4 +1,4 @@
-package com.thinking.storm.sport;
+package com.thinking.storm.example;
 
 import org.apache.storm.spout.SpoutOutputCollector;
 import org.apache.storm.task.TopologyContext;

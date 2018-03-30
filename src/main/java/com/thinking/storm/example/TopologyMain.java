@@ -1,9 +1,6 @@
-package com.thinking.storm;
+package com.thinking.storm.example;
 
 
-import com.thinking.storm.sport.WordCounter;
-import com.thinking.storm.sport.WordNormalizer;
-import com.thinking.storm.sport.WordReader;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.storm.Config;
 import org.apache.storm.LocalCluster;
